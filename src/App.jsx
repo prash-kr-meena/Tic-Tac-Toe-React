@@ -1,30 +1,42 @@
 import {useState} from "react";
 
-function Board() {
-  const [state, setState] = useState(undefined);
+function Cell({turnValue, setTurnValue}) {
+  const [cellValue, setCellValue] = useState(undefined);
 
   function handleClick() {
-    return state === 'X' ? setState('O') : setState('X');
+    // Can't Set cellValue once it has already been Set
+    if (cellValue !== undefined) {
+      return;
+    }
+    setCellValue(turnValue)
+    // update the turnValue
+    turnValue === 'X' ? setTurnValue('O') : setTurnValue('X');
   }
+
+  return <button className="square" onClick={handleClick}>{cellValue}</button>
+}
+
+function Board() {
+  const [turnValue, setTurnValue] = useState('X');
 
   return (
       <>
         <div className="board-row">
-          <button className="square" onClick={handleClick}>{state}</button>
-          <button className="square">2</button>
-          <button className="square">3</button>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
         </div>
 
         <div className="board-row">
-          <button className="square">4</button>
-          <button className="square">5</button>
-          <button className="square">6</button>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
         </div>
 
         <div className="board-row">
-          <button className="square">7</button>
-          <button className="square">8</button>
-          <button className="square">9</button>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
+          <Cell turnValue={turnValue} setTurnValue={setTurnValue}/>
         </div>
       </>
   );
