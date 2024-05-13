@@ -1,11 +1,18 @@
 import {useState} from "react";
+import PropTypes from "prop-types";
+
 
 function Cell({turnValue, setTurnValue}) {
-  const [cellValue, setCellValue] = useState(undefined);
+  Cell.propTypes = {
+    turnValue: PropTypes.number.isRequired,
+    setTurnValue: PropTypes.func.isRequired
+  };
+
+  const [cellValue, setCellValue] = useState(null);
 
   function handleClick() {
     // Can't Set cellValue once it has already been Set
-    if (cellValue !== undefined) {
+    if (cellValue !== null) {
       return;
     }
     setCellValue(turnValue)
